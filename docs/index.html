@@ -9,7 +9,8 @@
 </head>
 <body>
     <h1>Recovered Treasure TX - Card Collection Analyzer</h1>
-    <input type="file" id="csvInput" accept=".csv">
+    <label for="csvInput">Upload CSV file:</label>
+    <input type="file" id="csvInput" accept=".csv" title="Select a CSV file to analyze" aria-label="CSV file upload">
     <button id="analyzeBtn">Analyze Collection</button>
     <div id="output"></div>
     <script src="main.js"></script>
