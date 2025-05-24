@@ -41,15 +41,21 @@ index = list(desc.index)
 }
 
 function renderTable(data, columns, index) {
-    let html = '<table class="styled-table"><thead><tr><th></th>';
+    let html = '<table class="styled-table"><thead><tr><th>Statistic</th>';
     for (const col of columns) {
         html += `<th>${col}</th>`;
     }
     html += '</tr></thead><tbody>';
-    for (const row of index) {
-        html += `<tr><td>${row}</td>`;
+    for (const stat of index) {
+        html += `<tr><td>${stat}</td>`;
         for (const col of columns) {
-            html += `<td>${Number(data[col][row]).toLocaleString(undefined, {maximumFractionDigits: 4})}</td>`;
+            let value = data[col][stat];
+            if (typeof value === 'number') {
+                value = value.toLocaleString(undefined, { maximumFractionDigits: 4 });
+            } else if (value === null || value === undefined) {
+                value = '';
+            }
+            html += `<td>${value}</td>`;
         }
         html += '</tr>';
     }
