@@ -27,6 +27,9 @@ desc = df.describe()
 output = desc.to_json()
 columns = list(desc.columns)
 index = list(desc.index)
+print('DEBUG: desc.to_json()', output)
+print('DEBUG: columns', columns)
+print('DEBUG: index', index)
 `;
     try {
         await pyodide.runPythonAsync(code);
@@ -34,9 +37,11 @@ index = list(desc.index)
         const columns = pyodide.globals.get('columns').toJs();
         const index = pyodide.globals.get('index').toJs();
         const data = JSON.parse(output);
+        console.log('DEBUG: Data for table', data, columns, index); // Debugging
         renderTable(data, columns, index);
     } catch (err) {
         document.getElementById('output').innerText = 'Error: ' + err;
+        console.error('DEBUG: Error in runPythonAnalysis', err); // Debugging
     }
 }
 
